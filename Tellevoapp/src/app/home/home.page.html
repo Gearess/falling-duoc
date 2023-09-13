@@ -1,12 +1,12 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Bienvenido Usuario</ion-title>
+    <ion-title>Bienvenido {{usuario.nombre}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
   <ion-button [routerLink]="['/viaje']" expand="block">Programar Viaje</ion-button>
   <br>
-  <ion-button [routerLink]="['/password']" expand="block">Vehiculos Disponibles</ion-button>
+  <ion-button (click)="p()" expand="block">Vehiculos Disponibles</ion-button>
 </ion-content>
 
