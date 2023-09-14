@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { DisponiblePage } from '../disponible/disponible.page';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -10,15 +11,25 @@ import { DisponiblePage } from '../disponible/disponible.page';
 export class HomePage implements OnInit {
   usuario = JSON.parse(localStorage.getItem('usuario')!) ?? { nombre: '', password: 0 };
 
-  costo = JSON.parse(localStorage.getItem('precio')!) ?? {precio: 0};
+  viaje = JSON.parse(localStorage.getItem('viaje')!);
   
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+    public alertController: AlertController) { }
 
   ngOnInit() {
   }
-  p(){
-    if (this.costo =! null){
+  async p(){
+    if (this.viaje !== null){
         this.router.navigateByUrl('/disponible')
+    }
+    else{
+      const alert = await this.alertController.create({
+        header: 'Datos incorrectos',
+        message: 'Los datos que ingresaste son incorrectos.',
+        buttons: ['Aceptar']
+      });
+  
+      await alert.present();
     }
   }
 

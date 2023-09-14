@@ -33,7 +33,14 @@ export class ViajePage implements OnInit {
         costo: f.costo
       }
   
-      localStorage.setItem('viaje',JSON.stringify(viaje));
+      localStorage.setItem('viaje',JSON.stringify(viaje))
+      const alert = await this.alertController.create({
+        header: 'Datos ingresados',
+        message: 'Los datos fueron ingresados de forma exitosa.',
+        buttons: ['Aceptar']
+      });
+
+      await alert.present();
       this.router.navigateByUrl('/home')
     }
     else{
@@ -46,5 +53,4 @@ export class ViajePage implements OnInit {
       await alert.present();
     }
   }
-
 }
