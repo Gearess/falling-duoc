@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { DisponiblePage } from '../disponible/disponible.page';
 import { AlertController } from '@ionic/angular';
+import { AutheticationService } from '../authetication.service';
+
 
 @Component({
   selector: 'app-home',
@@ -9,12 +11,12 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
-  usuario = JSON.parse(localStorage.getItem('usuario')!) ?? { nombre: '', password: 0 };
-
   viaje = JSON.parse(localStorage.getItem('viaje')!);
-  
+  user :any
   constructor(private router: Router,
-    public alertController: AlertController) { }
+    public alertController: AlertController,
+    private authService: AutheticationService) {
+       this.user = authService.getProfile()}
 
   ngOnInit() {
   }
@@ -33,5 +35,11 @@ export class HomePage implements OnInit {
     }
   }
 
+  signOut(){
+
+    this.authService.signOut().then(() =>{
+      this.router.navigate(['/login'])
+    })
+   }
 }
 

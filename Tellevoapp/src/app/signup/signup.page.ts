@@ -6,21 +6,32 @@ import { AlertController, LoadingController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.page.html',
-  styleUrls: ['./login.page.scss'],
+  selector: 'app-signup',
+  templateUrl: './signup.page.html',
+  styleUrls: ['./signup.page.scss'],
 })
-export class LoginPage implements OnInit {
+export class SignupPage implements OnInit {
   ionicForm: FormGroup;
 
-  // email:any
-  // password:any
-  // contact:any
 
-  constructor(private toastController: ToastController, private alertController: AlertController, private loadingController: LoadingController, private authService: AutheticationService, private router: Router, public formBuilder: FormBuilder) { }
+  constructor(private toastController: ToastController,private loadingController: LoadingController,private authService:AutheticationService,private router: Router, public formBuilder: FormBuilder) { 
+
+  }
 
   ngOnInit() {
+    // this.signUP()
     this.ionicForm = this.formBuilder.group({
+      fullname:['',
+        [Validators.required]
+      ],
+      contact:['',
+      [
+        Validators.required,
+        Validators.pattern("^[0-9]*$"),
+        Validators.minLength(10),
+        // Validators.min(10)
+      ]
+    ],
       email: [
         '',
         [
@@ -29,21 +40,22 @@ export class LoginPage implements OnInit {
         ],
       ],
       password: ['', [
-        // Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}'),
+        Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-8])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}'),
         Validators.required,
-      ]
       ],
+    ],
     });
   }
-
-  async login() {
+  get errorControl() {
+    return this.ionicForm.controls;
+  }
+ 
+  async signUP(){
     const loading = await this.loadingController.create();
     await loading.present();
-    // console.log(this.email + this.password);
     if (this.ionicForm.valid) {
 
-      //  await  loading.dismiss();
-      const user = await this.authService.loginUser(this.ionicForm.value.email, this.ionicForm.value.password).catch((err) => {
+      const user = await this.authService.registerUser(this.ionicForm.value.email, this.ionicForm.value.password,this.ionicForm.value.fullname).catch((err) => {
         this.presentToast(err)
         console.log(err);
         loading.dismiss();
@@ -56,15 +68,14 @@ export class LoginPage implements OnInit {
     } else {
       return console.log('Please provide all the required values!');
     }
-
   }
-  get errorControl() {
-    return this.ionicForm.controls;
+  signUpUsingPhonenumber(contact:string){
+    
+    this.authService.signInWithPhoneNumber(contact)
   }
-
   async presentToast(message: undefined) {
     console.log(message);
-
+    
     const toast = await this.toastController.create({
       message: message,
       duration: 1500,
