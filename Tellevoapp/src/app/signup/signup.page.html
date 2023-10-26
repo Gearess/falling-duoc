@@ -1,9 +1,3 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>signup</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
@@ -12,13 +6,13 @@
   </ion-header>
 
   <div class="header">
-    <ion-title class="title" size="large">Get Started</ion-title>
-    <p class="subtitle">By creating an account</p>
+    <ion-title class="title" size="large">Empezemos</ion-title>
+    <p class="subtitle">Por crear una cuenta</p>
   </div>
   <form [formGroup]="ionicForm" novalidate>
     <div class="ion-padding">
       <ion-item >
-        <ion-input class="input" formControlName="fullname" placeholder="Fullname" />
+        <ion-input class="input" formControlName="fullname" placeholder="Nombre Completo" />
         <ion-icon slot="end" name="person-outline"></ion-icon>
       </ion-item>
       <div style="padding-top: -26px;padding-bottom: 16px;"
@@ -27,7 +21,7 @@
           required.</ion-text>
       </div>
       <ion-item>
-        <ion-input class="input" formControlName="email" placeholder="email" />
+        <ion-input class="input" formControlName="email" placeholder="Email" />
         <ion-icon slot="end" name="mail-outline"></ion-icon>
       </ion-item>
       <div style="padding-top: -26px;padding-bottom: 16px;"
@@ -38,7 +32,7 @@
           email.</ion-text>
       </div>
       <ion-item>
-        <ion-input class="input" type="password" formControlName="password" placeholder="password" />
+        <ion-input class="input" type="password" formControlName="password" placeholder="Contraseña" />
         <ion-icon slot="end" name="lock-closed-outline"></ion-icon>
       </ion-item>
       <div style="padding-top: -26px;padding-bottom: 16px;"
@@ -52,15 +46,15 @@
         </ion-text>
       </div>
       <ion-item>
-        <ion-input class="input" type="numeric" formControlName="contact" placeholder="contact" />
+        <ion-input class="input" type="numeric" formControlName="contact" placeholder="Teléfono" />
         <ion-icon slot="end" name="call-outline"></ion-icon>
       </ion-item>
       <div style="padding-top: -26px;padding-bottom: 16px;"
         *ngIf="this.ionicForm.controls?.['contact'].touched && this.ionicForm.controls?.['contact'].invalid">
         <ion-text *ngIf="errorControl.contact.errors?.required" class="errorInput" color="danger">Contact is
           required..</ion-text>
-          <ion-text *ngIf="errorControl.contact.errors?.pattern" class="errorInput" color="danger">Contact should contain only numbers..</ion-text>
-          <ion-text *ngIf="errorControl.contact.errors?.minlength" class="errorInput" color="danger">Contact should be less than 10 digit..</ion-text>
+          <ion-text *ngIf="errorControl.contact.errors?.pattern" class="errorInput" color="danger">El telefono debe solo contener numeros..</ion-text>
+          <ion-text *ngIf="errorControl.contact.errors?.minlength" class="errorInput" color="danger">El telefono debe tener por lo menos 10 digitos..</ion-text>
     
         </div>
       <!-- <p>Or</p>
@@ -71,7 +65,7 @@
   <div id="recaptcha-container"></div> -->
 
       <div class="loginLink">
-        <p class="p">Already a memember? <a [routerLink]="['/login']" style="color: #FFC33F">Log in</a></p>
+        <p class="p">Ya posee cuenta? <a [routerLink]="['/login']" style="color: #FFC33F">Ingrese aqui</a></p>
       </div>
     </div>
 

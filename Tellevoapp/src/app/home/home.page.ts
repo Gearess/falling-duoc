@@ -12,14 +12,19 @@ import { AutheticationService } from '../authetication.service';
 })
 export class HomePage implements OnInit {
   viaje = JSON.parse(localStorage.getItem('viaje')!);
-  user :any
+  email :any
   constructor(private router: Router,
     public alertController: AlertController,
-    private authService: AutheticationService) {
-       this.user = authService.getProfile()}
+    private authService: AutheticationService) {}
 
-  ngOnInit() {
-  }
+    ngOnInit(): void {
+   
+      this.authService.getProfile().then((user) =>{
+          this.email = user?.email
+          console.log(user);
+          
+      })
+    }
   async p(){
     if (this.viaje !== null){
         this.router.navigateByUrl('/disponible')

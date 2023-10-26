@@ -55,7 +55,7 @@ export class SignupPage implements OnInit {
     await loading.present();
     if (this.ionicForm.valid) {
 
-      const user = await this.authService.registerUser(this.ionicForm.value.email, this.ionicForm.value.password,this.ionicForm.value.fullname).catch((err) => {
+      const user = await this.authService.registerUser(this.ionicForm.value.email, this.ionicForm.value.password).catch((err) => {
         this.presentToast(err)
         console.log(err);
         loading.dismiss();
